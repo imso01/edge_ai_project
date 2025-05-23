@@ -20,7 +20,7 @@ def speak(text, speed='normal'):
     else:
         os.system("mpg123 output.mp3")
 
-# "쿠키야"를 감지할 때까지 대기
+# "아이몬"를 감지할 때까지 대기
 def wait_for_activation():
     with sr.Microphone() as source:
         print("\n🟢 대기 중... '아이몬' 라고 말하면 음성 입력 시작!")
@@ -129,10 +129,11 @@ def client_program():
 
             elif '무궁화' in user_input:
                 client_socket.send('무궁화'.encode())
-                while True:
-                    speed = random.choice(['fast', 'normal', 'slow'])
-                    print(f"🎲 선택된 속도: {speed}")
-                    speak('무궁화 꽃이 피었습니다', speed)
+
+
+            elif '동물감지' in user_input or '동물 감지' in user_input:
+                client_socket.send('동물감지'.encode())
+                speak("동물 감지 모드를 시작합니다.")
 
             if user_input.lower() == 'exit':
                 print("연결을 종료합니다...")
