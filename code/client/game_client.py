@@ -16,12 +16,12 @@ SERVER_PORT = 5000
 CLIENT_ID = 'KJH'
 
 # ============================ 서버 연결 ============================
-def connect_to_server(host='127.0.0.1', port=5000):
+def connect_to_server(host=SERVER_HOST, port=SERVER_PORT, client_id=CLIENT_ID):
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect((host, port))
-        s.sendall("KJH".encode())
-        print("[서버 연결 성공 및 ID 전송 완료]")
+        s.sendall(client_id.encode())
+        print(f"[서버 연결 성공 및 ID({client_id}) 전송 완료]")
         return s
     except Exception as e:
         print("[서버 연결 실패]:", e)
@@ -491,7 +491,7 @@ def run_animal_detection():
         print("[서버 전송 실패]:", e)
 
     try:
-        model = YOLO('yolo/best.pt')
+        model = YOLO('../models/yolo/best.pt')
         print("[YOLO] 모델 로드 완료")
     except Exception as e:
         print("[YOLO] 모델 로드 실패:", e)
